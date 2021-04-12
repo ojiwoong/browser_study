@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>window_coordinates</title>
+    <style>
+      body {
+        background-color: black;
+      }
+
+      .square {
+        width: 8rem;
+        height: 8rem;
+        background-color: blue;
+        margin-bottom: 0.5rem;
+        border-radius: 0.4rem;
+      }
+
+      .square.other {
+        background-color: aqua;
+      }
+
+      .button {
+        position: fixed;
+        top: 1rem;
+        right: 2rem;
+      }
+
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square other"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="button">
+      <button class="scroll_by_100px">Scroll by 100px(y)</button>
+      <button class="scroll_to_100px">Scroll to 100px(y)</button>
+      <button class="scroll_into_special">Scroll into 100px(y)</button>
+    </div>
+  </body>
+  <script>
+    const other = document.querySelector('.square.other');
+
+    other.addEventListener('click', (event) => {
+      const clientRects = other.getBoundingClientRect();
+      const clinetX = event.clientX;
+      const clientY = event.clientY;
+      const pageX = event.pageX;
+      const pageY = event.pageY;
+      console.log(clientRects);
+      console.log(`clinet: ${clinetX}, ${clientY}`);
+      console.log(`page: ${pageX}, ${pageY}`);
+    });
+
+    const scroll_by_100px = document.querySelector('.scroll_by_100px');
+    const scroll_to_100px = document.querySelector('.scroll_to_100px');
+    const scroll_into_special = document.querySelector('.scroll_into_special');
+
+    scroll_by_100px.addEventListener('click', (event) => {
+      window.scrollBy({
+        top: 100,
+        left: 0,
+        behavior: 'smooth',
+      });
+    });
+
+    scroll_to_100px.addEventListener('click', (event) => {
+      window.scrollTo({
+        top: 100,
+        left: 0,
+        behavior: 'smooth',
+      });
+    });
+
+    scroll_into_special.addEventListener('click', (event) => {
+      other.scrollIntoView();
+    });
+  </script>
+</html>
